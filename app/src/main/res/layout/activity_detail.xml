@@ -47,6 +47,7 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/ivDetailStory"
+        android:transitionName="image"
         android:layout_width="match_parent"
         android:layout_height="160dp"
         android:layout_marginStart="16dp"
@@ -70,6 +71,7 @@
 
     <TextView
         android:id="@+id/tvName"
+        android:transitionName="name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -105,6 +107,7 @@
 
             <TextView
                 android:id="@+id/tvStoryDesc"
+                android:transitionName="description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"

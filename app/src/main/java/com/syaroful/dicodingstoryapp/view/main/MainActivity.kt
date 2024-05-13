@@ -14,7 +14,6 @@ import com.syaroful.dicodingstoryapp.data.ResultState
 import com.syaroful.dicodingstoryapp.databinding.ActivityMainBinding
 import com.syaroful.dicodingstoryapp.view.ViewModelFactory
 import com.syaroful.dicodingstoryapp.view.create_story.CreateStoryActivity
-import com.syaroful.dicodingstoryapp.view.detail.DetailActivity
 import com.syaroful.dicodingstoryapp.view.onboarding.OnboardingActivity
 
 class MainActivity : AppCompatActivity() {
@@ -72,17 +71,13 @@ class MainActivity : AppCompatActivity() {
                             Toast.makeText(this, "empty data", Toast.LENGTH_SHORT).show()
                         } else {
                             adapter.submitList(result.data)
+                            binding.rvStory.adapter = adapter
                         }
                     }
                 }
             }
         }
 
-        adapter.setOnItemListener {
-            val intent = Intent(this, DetailActivity::class.java)
-            intent.putExtra(DetailActivity.EXTRA_DATA, it)
-            startActivity(intent)
-        }
 
         binding.logoutButton.setOnClickListener {
             AlertDialog.Builder(this).apply {
@@ -90,8 +85,6 @@ class MainActivity : AppCompatActivity() {
                 setMessage("Are you sure you want to logout?")
                 setPositiveButton("Log out") { _, _ ->
                     viewModel.logout()
-                    startActivity(Intent(context, OnboardingActivity::class.java))
-                    finish()
                 }
                 setNegativeButton("No", null)
                 create()
