@@ -7,10 +7,8 @@ import com.syaroful.dicodingstoryapp.data.StoryRepository
 import com.syaroful.dicodingstoryapp.di.Injection
 import com.syaroful.dicodingstoryapp.view.create_story.CreateStoryViewModel
 import com.syaroful.dicodingstoryapp.view.detail.DetailViewModel
-import com.syaroful.dicodingstoryapp.view.login.LoginViewModel
 import com.syaroful.dicodingstoryapp.view.main.MainViewModel
 import com.syaroful.dicodingstoryapp.view.onboarding.OnboardingViewModel
-import com.syaroful.dicodingstoryapp.view.signup.SignupViewModel
 
 class ViewModelFactory(private val repository: StoryRepository) :
     ViewModelProvider.NewInstanceFactory() {
@@ -22,20 +20,12 @@ class ViewModelFactory(private val repository: StoryRepository) :
                 DetailViewModel(repository) as T
             }
 
-            modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
-                LoginViewModel(repository) as T
-            }
-
             modelClass.isAssignableFrom(MainViewModel::class.java) -> {
                 MainViewModel(repository) as T
             }
 
             modelClass.isAssignableFrom(OnboardingViewModel::class.java) -> {
                 OnboardingViewModel(repository) as T
-            }
-
-            modelClass.isAssignableFrom(SignupViewModel::class.java) -> {
-                SignupViewModel(repository) as T
             }
 
             modelClass.isAssignableFrom(CreateStoryViewModel::class.java) -> {
@@ -47,17 +37,9 @@ class ViewModelFactory(private val repository: StoryRepository) :
     }
 
     companion object {
-        @Volatile
-        private var instance: ViewModelFactory? = null
-
         @JvmStatic
-        fun getInstance(context: Context): ViewModelFactory {
-            if (instance == null) {
-                synchronized(ViewModelFactory::class.java) {
-                    instance = ViewModelFactory(Injection.provideRepository(context))
-                }
-            }
-            return instance as ViewModelFactory
-        }
+        fun getInstance(context: Context) =
+            ViewModelFactory(Injection.provideStoryRepository(context))
+
     }
 }

@@ -8,13 +8,13 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.syaroful.dicodingstoryapp.data.ResultState
 import com.syaroful.dicodingstoryapp.databinding.ActivitySignupBinding
-import com.syaroful.dicodingstoryapp.view.ViewModelFactory
+import com.syaroful.dicodingstoryapp.view.AuthViewModelFactory
 import com.syaroful.dicodingstoryapp.view.login.LoginActivity
 
 class SignupActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignupBinding
     private val viewModel by viewModels<SignupViewModel> {
-        ViewModelFactory.getInstance(this)
+        AuthViewModelFactory.getInstance(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

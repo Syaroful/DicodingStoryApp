@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity() {
         ViewModelFactory.getInstance(this)
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -43,6 +42,11 @@ class MainActivity : AppCompatActivity() {
         setupAction()
     }
 
+    override fun onResume() {
+        super.onResume()
+        getStoryAction()
+    }
+
     private fun setupView() {
         binding.rvStory.adapter = adapter
         val layoutManager = LinearLayoutManager(this)
@@ -54,7 +58,27 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupAction() {
+        getStoryAction()
+        binding.logoutButton.setOnClickListener {
+            AlertDialog.Builder(this).apply {
+                setTitle("Alert!")
+                setMessage("Are you sure you want to logout?")
+                setPositiveButton("Log out") { _, _ ->
+                    viewModel.logout()
+                }
+                setNegativeButton("No", null)
+                create()
+                show()
+            }
 
+        }
+
+        binding.addStoryButton.setOnClickListener {
+            startActivity(Intent(this, CreateStoryActivity::class.java))
+        }
+    }
+
+    private fun getStoryAction() {
         viewModel.getStories().observe(this) { result ->
             if (result != null) {
                 when (result) {
@@ -78,25 +102,6 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
-        }
-
-
-        binding.logoutButton.setOnClickListener {
-            AlertDialog.Builder(this).apply {
-                setTitle("Alert!")
-                setMessage("Are you sure you want to logout?")
-                setPositiveButton("Log out") { _, _ ->
-                    viewModel.logout()
-                }
-                setNegativeButton("No", null)
-                create()
-                show()
-            }
-
-        }
-
-        binding.addStoryButton.setOnClickListener {
-            startActivity(Intent(this, CreateStoryActivity::class.java))
         }
     }
 
