@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Dicoding Story App</string>
+    <string name="password_hint">Enter password</string>
+    <string name="email_hint">Enter your email</string>
+    <string name="username_hint">Enter your name</string>
+    <string name="email">Email address</string>
+    <string name="password">Password</string>
+    <string name="hello_welcome_back">Hello, Welcome back 👋</string>
+    <string name="happy_to_have_you_back">Happy to have you back</string>
+    <string name="login">Login</string>
+    <string name="onboarding_welcome">Welcome to Story App</string>
+    <string name="onboarding_desc">Sebenarnya saya pusing dan saya \n tidak tahu lagi harus menulis \n apa pada bagaian ini.</string>
+    <string name="signup">Signup</string>
+    <string name="name">Name</string>
+    <string name="create_accout">Create Accout 👋</string>
+    <string name="happy_to_have_you_on_board">Happy to have you on board</string>
+    <string name="name_hint">Enter your name</string>
+    <string name="button_logout">Logout</string>
+    <string name="welcome_to_story_app">Welcome to story app</string>
+    <string name="add_new_story">Add New Story</string>
+    <string name="img_desc">ini adalah contoh dari deskripsi gambar yang sangat panjang dan bisa jadi ini lebih pendek</string>
+    <string name="date">12 Apirl 2023</string>
+    <string name="detail_story">Detail Story</string>
+    <string name="note">Note</string>
+    <string name="author">Author</string>
+    <string name="upload">Upload</string>
+    <string name="share_your_story">Share your story...</string>
+</resources>
