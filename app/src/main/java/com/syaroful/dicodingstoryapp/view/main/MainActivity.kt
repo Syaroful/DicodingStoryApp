@@ -30,6 +30,13 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        viewModel.getSession().observe(this) { user ->
+            if (!user.isLogin) {
+                startActivity(Intent(this, OnboardingActivity::class.java))
+                finish()
+            }
+        }
+
         adapter = StoryAdapter()
         setupView()
         setupAction()
@@ -46,7 +53,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupAction() {
-        viewModel.getSession()
+
         viewModel.getStories().observe(this) { result ->
             if (result != null) {
                 when (result) {

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.syaroful.dicodingstoryapp.data.response.ListStoryItem
 import com.syaroful.dicodingstoryapp.databinding.StoryCardBinding
+import com.syaroful.dicodingstoryapp.utils.withDateFormat
 
 class StoryAdapter : ListAdapter<ListStoryItem, StoryAdapter.MyViewHolder>(DIFF_CALLBACK) {
     private var onItemClickListener: ((ListStoryItem) -> Unit)? = null
@@ -24,6 +25,7 @@ class StoryAdapter : ListAdapter<ListStoryItem, StoryAdapter.MyViewHolder>(DIFF_
                     .load(stories.photoUrl)
                     .into(ivStory)
                 tvName.text = stories.name
+                tvDate.text = stories.createdAt?.withDateFormat()
                 tvDescription.text = stories.description
             }
         }

@@ -32,11 +32,8 @@
             android:exported="false" />
         <activity
             android:name=".view.onboarding.OnboardingActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="false">
+
         </activity>
         <activity
             android:name=".view.login.LoginActivity"
@@ -44,9 +41,10 @@
             android:theme="@style/Theme.DicodingStoryApp" />
         <activity
             android:name=".view.main.MainActivity"
-            android:exported="false">
+            android:exported="true">
             <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 

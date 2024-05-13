@@ -22,12 +22,6 @@ class OnboardingActivity : AppCompatActivity() {
         binding = ActivityOnboardingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel.getSession().observe(this) { user ->
-            if (user.isLogin) {
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
-            }
-        }
         setupView()
         setupAction()
     }
