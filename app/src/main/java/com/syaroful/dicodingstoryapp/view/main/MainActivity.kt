@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -77,8 +78,19 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.logoutButton.setOnClickListener {
-            viewModel.logout()
-            startActivity(Intent(this, OnboardingActivity::class.java))
+            AlertDialog.Builder(this).apply {
+                setTitle("Alert!")
+                setMessage("Are you sure you want to logout?")
+                setPositiveButton("Log out") { _, _ ->
+                    viewModel.logout()
+                    startActivity(Intent(context, OnboardingActivity::class.java))
+                    finish()
+                }
+                setNegativeButton("No", null)
+                create()
+                show()
+            }
+
         }
 
         binding.addStoryButton.setOnClickListener {

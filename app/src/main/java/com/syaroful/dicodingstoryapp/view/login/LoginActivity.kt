@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.syaroful.dicodingstoryapp.data.ResultState
 import com.syaroful.dicodingstoryapp.data.pref.UserModel
@@ -53,19 +52,9 @@ class LoginActivity : AppCompatActivity() {
                                     true
                                 )
                             )
-                            AlertDialog.Builder(this).apply {
-                                setTitle("Success!")
-                                setMessage("Welcome back, press continue to home")
-                                setPositiveButton("Continue") { _, _ ->
-                                    val intent = Intent(context, MainActivity::class.java)
-                                    intent.flags =
-                                        Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                                    startActivity(intent)
-                                    finish()
-                                }
-                                create()
-                                show()
-                            }
+                            val intent = Intent(this, MainActivity::class.java)
+                            startActivity(intent)
+                            finish()
 
                         }
                     }
