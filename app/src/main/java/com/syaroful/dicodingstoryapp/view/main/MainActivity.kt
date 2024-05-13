@@ -33,6 +33,8 @@ class MainActivity : AppCompatActivity() {
             if (!user.isLogin) {
                 startActivity(Intent(this, OnboardingActivity::class.java))
                 finish()
+            } else {
+                binding.toolbarUserEmail.text = user.email
             }
         }
 
