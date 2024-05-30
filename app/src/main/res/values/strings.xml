@@ -25,4 +25,5 @@
     <string name="author">Author</string>
     <string name="upload">Upload</string>
     <string name="share_your_story">Share your story...</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>

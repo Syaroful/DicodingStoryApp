@@ -26,9 +26,16 @@ class AuthViewModelFactory(private val repository: UserRepository) :
     }
 
     companion object {
+        @Volatile
+        private var instance: AuthViewModelFactory? = null
         @JvmStatic
-        fun getInstance(context: Context) =
-            AuthViewModelFactory(Injection.provideUserRepository(context))
-
+        fun getInstance(context: Context): AuthViewModelFactory {
+            if (instance == null) {
+                synchronized(AuthViewModelFactory::class.java) {
+                    instance = AuthViewModelFactory(Injection.provideUserRepository(context))
+                }
+            }
+            return instance as AuthViewModelFactory
+        }
     }
 }

@@ -9,11 +9,11 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.syaroful.dicodingstoryapp.R
 import com.syaroful.dicodingstoryapp.data.ResultState
 import com.syaroful.dicodingstoryapp.databinding.ActivityMainBinding
 import com.syaroful.dicodingstoryapp.view.ViewModelFactory
 import com.syaroful.dicodingstoryapp.view.create_story.CreateStoryActivity
+import com.syaroful.dicodingstoryapp.view.maps.MapsActivity
 import com.syaroful.dicodingstoryapp.view.onboarding.OnboardingActivity
 
 class MainActivity : AppCompatActivity() {
@@ -53,15 +53,15 @@ class MainActivity : AppCompatActivity() {
         binding.rvStory.layoutManager = layoutManager
         val itemDecoration = DividerItemDecoration(this, layoutManager.orientation)
         binding.rvStory.addItemDecoration(itemDecoration)
-
-        binding.addStoryButton.setBackgroundColor(getColor(R.color.yellow500))
     }
+
 
     private fun setupAction() {
         getStoryAction()
+
         binding.logoutButton.setOnClickListener {
             AlertDialog.Builder(this).apply {
-                setTitle("Alert!")
+                setTitle("Log out!")
                 setMessage("Are you sure you want to logout?")
                 setPositiveButton("Log out") { _, _ ->
                     viewModel.logout()
@@ -75,6 +75,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.addStoryButton.setOnClickListener {
             startActivity(Intent(this, CreateStoryActivity::class.java))
+        }
+
+        binding.mapsButton.setOnClickListener{
+            startActivity(Intent(this, MapsActivity::class.java))
         }
     }
 

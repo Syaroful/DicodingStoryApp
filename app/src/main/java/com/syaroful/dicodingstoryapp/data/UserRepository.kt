@@ -17,7 +17,6 @@ class UserRepository private constructor(
         userPreference.saveSession(user)
     }
 
-
     fun register(name: String, email: String, password: String) = liveData {
         emit(ResultState.Loading)
         try {
@@ -43,9 +42,14 @@ class UserRepository private constructor(
     }
 
     companion object {
+        @Volatile
+        private var instance: UserRepository? = null
         fun getInstance(
             userPreference: UserPreference,
             apiService: ApiService
-        ) = UserRepository(userPreference, apiService)
+        ): UserRepository =
+            instance ?: synchronized(this) {
+                instance ?: UserRepository(userPreference, apiService)
+            }.also { instance = it }
     }
 }

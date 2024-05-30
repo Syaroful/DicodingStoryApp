@@ -6,10 +6,8 @@ import com.google.gson.Gson
 import com.syaroful.dicodingstoryapp.data.api.ApiService
 import com.syaroful.dicodingstoryapp.data.pref.UserModel
 import com.syaroful.dicodingstoryapp.data.pref.UserPreference
-import com.syaroful.dicodingstoryapp.data.response.DetailStoryResponse
 import com.syaroful.dicodingstoryapp.data.response.FileUploadResponse
 import com.syaroful.dicodingstoryapp.data.response.ListStoryItem
-import com.syaroful.dicodingstoryapp.data.response.Story
 import com.syaroful.dicodingstoryapp.data.response.StoryResponse
 import kotlinx.coroutines.flow.Flow
 import okhttp3.MediaType.Companion.toMediaType
@@ -44,15 +42,15 @@ class StoryRepository private constructor(
         }
     }
 
-    fun getDetailStory(id: String): LiveData<ResultState<Story>> = liveData {
+    fun getStoriesWithLocation(): LiveData<ResultState<List<ListStoryItem>>> = liveData {
         emit(ResultState.Loading)
         try {
-            val successResponse = apiService.getDetailStories(id)
-            emit(ResultState.Success(successResponse.story))
-        } catch (e: HttpException) {
-            val errorBody = e.response()?.errorBody()?.string()
-            val errorResponse = Gson().fromJson(errorBody, DetailStoryResponse::class.java)
-            emit(ResultState.Error(errorResponse.message))
+            val successResponse = apiService.getStoriesWithLocation()
+            emit(ResultState.Success(successResponse.listStory))
+        }catch (e: HttpException){
+            val errorBody = e.response()?.errorBody()?.toString()
+            val errorResponse = Gson().fromJson(errorBody, StoryResponse::class.java)
+            emit(ResultState.Error(errorResponse.message ?: "Unknown Error"))
         }
     }
 
@@ -75,6 +73,17 @@ class StoryRepository private constructor(
         }
     }
 
+//    companion object {
+//        @Volatile
+//        private var instance: StoryRepository? = null
+//        fun getInstance(
+//            userPreference: UserPreference,
+//            apiService: ApiService
+//        ): StoryRepository =
+//            instance ?: synchronized(this) {
+//                instance ?: StoryRepository(userPreference, apiService)
+//            }.also { instance = it }
+//    }
     companion object {
         fun getInstance(
             userPreference: UserPreference,

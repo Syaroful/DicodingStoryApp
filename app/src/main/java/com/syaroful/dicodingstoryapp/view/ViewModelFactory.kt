@@ -8,6 +8,7 @@ import com.syaroful.dicodingstoryapp.di.Injection
 import com.syaroful.dicodingstoryapp.view.create_story.CreateStoryViewModel
 import com.syaroful.dicodingstoryapp.view.detail.DetailViewModel
 import com.syaroful.dicodingstoryapp.view.main.MainViewModel
+import com.syaroful.dicodingstoryapp.view.maps.MapsViewModel
 import com.syaroful.dicodingstoryapp.view.onboarding.OnboardingViewModel
 
 class ViewModelFactory(private val repository: StoryRepository) :
@@ -32,14 +33,30 @@ class ViewModelFactory(private val repository: StoryRepository) :
                 CreateStoryViewModel(repository) as T
             }
 
+            modelClass.isAssignableFrom(MapsViewModel::class.java) -> {
+                MapsViewModel(repository) as T
+            }
+
             else -> throw IllegalArgumentException("unknown ViewModel Class: " + modelClass.name)
         }
     }
 
+//    companion object {
+//        @Volatile
+//        private var instance: ViewModelFactory? = null
+//        @JvmStatic
+//        fun getInstance(context: Context): ViewModelFactory {
+//            if (instance == null) {
+//                synchronized(ViewModelFactory::class.java) {
+//                    instance = ViewModelFactory(Injection.provideStoryRepository(context))
+//                }
+//            }
+//            return instance as ViewModelFactory
+//        }
+//    }
+
     companion object {
-        @JvmStatic
         fun getInstance(context: Context) =
             ViewModelFactory(Injection.provideStoryRepository(context))
-
     }
 }
