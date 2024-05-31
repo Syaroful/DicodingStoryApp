@@ -44,7 +44,7 @@ class CustomEmailEditText : AppCompatEditText {
                 val isValidEmail = email.matches(emailPattern.toRegex())
 
                 if (!isValidEmail) {
-                    setError("Type email format correctly", null)
+                    setError(context.getString(R.string.type_email_format_correctly), null)
                 } else {
                     error = null
                 }

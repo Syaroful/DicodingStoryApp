@@ -39,7 +39,7 @@ class CustomPasswordEditText : AppCompatEditText {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (s.toString().length < 8) {
-                    setError("Password must at least have 8 characters", null)
+                    setError(context.getString(R.string.password_must_at_least_have_8_characters), null)
                 } else {
                     error = null
                 }

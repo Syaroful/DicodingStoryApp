@@ -26,4 +26,6 @@
     <string name="upload">Upload</string>
     <string name="share_your_story">Share your story...</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="password_must_at_least_have_8_characters">Password must at least have 8 characters</string>
+    <string name="type_email_format_correctly">Type email format correctly</string>
 </resources>

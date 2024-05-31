@@ -1,6 +1,5 @@
 package com.syaroful.dicodingstoryapp.data.api
 
-import com.syaroful.dicodingstoryapp.data.response.DetailStoryResponse
 import com.syaroful.dicodingstoryapp.data.response.FileUploadResponse
 import com.syaroful.dicodingstoryapp.data.response.LoginResponse
 import com.syaroful.dicodingstoryapp.data.response.RegisterResponse
@@ -13,7 +12,6 @@ import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
@@ -37,11 +35,6 @@ interface ApiService {
         @Query("page") page: Int = 1,
         @Query("size") size: Int = 20
     ): StoryResponse
-
-    @GET("stories/{id}")
-    suspend fun getDetailStories(
-        @Path("id") id: String
-    ): DetailStoryResponse
 
     @Multipart
     @POST("stories")
