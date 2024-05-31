@@ -3,18 +3,18 @@ package com.syaroful.dicodingstoryapp.view.main
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.syaroful.dicodingstoryapp.data.ResultState
 import com.syaroful.dicodingstoryapp.databinding.ActivityMainBinding
 import com.syaroful.dicodingstoryapp.view.ViewModelFactory
 import com.syaroful.dicodingstoryapp.view.create_story.CreateStoryActivity
 import com.syaroful.dicodingstoryapp.view.maps.MapsActivity
 import com.syaroful.dicodingstoryapp.view.onboarding.OnboardingActivity
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -36,28 +36,33 @@ class MainActivity : AppCompatActivity() {
                 binding.toolbarUserEmail.text = user.email
             }
         }
-
-        adapter = StoryAdapter()
         setupView()
         setupAction()
     }
 
     override fun onResume() {
         super.onResume()
-        getStoryAction()
+        if(!adapter.snapshot().isEmpty()){
+            adapter.refresh()
+            lifecycleScope.launch {
+                adapter.loadStateFlow
+                    .collect {
+                        binding.rvStory.smoothScrollToPosition(0)
+                    }
+            }
+        }
     }
 
     private fun setupView() {
-        binding.rvStory.adapter = adapter
         val layoutManager = LinearLayoutManager(this)
         binding.rvStory.layoutManager = layoutManager
         val itemDecoration = DividerItemDecoration(this, layoutManager.orientation)
         binding.rvStory.addItemDecoration(itemDecoration)
+        getStories()
     }
 
 
     private fun setupAction() {
-        getStoryAction()
 
         binding.logoutButton.setOnClickListener {
             AlertDialog.Builder(this).apply {
@@ -77,41 +82,22 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, CreateStoryActivity::class.java))
         }
 
-        binding.mapsButton.setOnClickListener{
+        binding.mapsButton.setOnClickListener {
             startActivity(Intent(this, MapsActivity::class.java))
         }
     }
 
-    private fun getStoryAction() {
-        viewModel.getStories().observe(this) { result ->
-            if (result != null) {
-                when (result) {
-                    is ResultState.Loading -> {
-                        showLoading(true)
-                    }
-
-                    is ResultState.Error -> {
-                        showLoading(false)
-                        Toast.makeText(this, "Failed to load data", Toast.LENGTH_SHORT).show()
-                    }
-
-                    is ResultState.Success -> {
-                        showLoading(false)
-                        if (result.data.isEmpty()) {
-                            Toast.makeText(this, "empty data", Toast.LENGTH_SHORT).show()
-                        } else {
-                            adapter.submitList(result.data)
-                            binding.rvStory.adapter = adapter
-                        }
-                    }
-                }
-            }
+    private fun getStories() {
+        adapter = StoryAdapter()
+        binding.rvStory.adapter = adapter
+        viewModel.story.observe(this) {
+            adapter.submitData(lifecycle, it)
         }
     }
+
 
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
-
 
 }

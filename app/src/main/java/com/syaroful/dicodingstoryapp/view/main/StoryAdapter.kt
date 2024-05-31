@@ -1,12 +1,12 @@
 package com.syaroful.dicodingstoryapp.view.main
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -15,15 +15,7 @@ import com.syaroful.dicodingstoryapp.databinding.StoryCardBinding
 import com.syaroful.dicodingstoryapp.utils.withDateFormat
 import com.syaroful.dicodingstoryapp.view.detail.DetailActivity
 
-class StoryAdapter : RecyclerView.Adapter<StoryAdapter.MyViewHolder>() {
-    private var stories: List<ListStoryItem> = listOf()
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun submitList(newList: List<ListStoryItem>) {
-        stories = newList
-        notifyDataSetChanged()
-    }
-
+class StoryAdapter : PagingDataAdapter<ListStoryItem, StoryAdapter.MyViewHolder>(DIFF_CALLBACK) {
     class MyViewHolder(private val binding: StoryCardBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(stories: ListStoryItem) {
@@ -55,12 +47,11 @@ class StoryAdapter : RecyclerView.Adapter<StoryAdapter.MyViewHolder>() {
         return MyViewHolder(binding)
     }
 
-    override fun getItemCount(): Int {
-        return stories.size
-    }
-
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(stories[position])
+        val data = getItem(position)
+        if (data != null){
+            holder.bind(data)
+        }
     }
 
     companion object {

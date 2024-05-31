@@ -2,6 +2,10 @@ package com.syaroful.dicodingstoryapp.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.liveData
 import com.google.gson.Gson
 import com.syaroful.dicodingstoryapp.data.api.ApiService
 import com.syaroful.dicodingstoryapp.data.pref.UserModel
@@ -30,16 +34,24 @@ class StoryRepository private constructor(
         userPreference.logout()
     }
 
-    fun getStories(): LiveData<ResultState<List<ListStoryItem>>> = liveData {
-        emit(ResultState.Loading)
-        try {
-            val successResponse = apiService.getStories()
-            emit(ResultState.Success(successResponse.listStory))
-        } catch (e: HttpException) {
-            val errorBody = e.response()?.errorBody()?.string()
-            val errorResponse = Gson().fromJson(errorBody, StoryResponse::class.java)
-            emit(ResultState.Error(errorResponse.message ?: "Unknown Error"))
-        }
+    fun getStories(): LiveData<PagingData<ListStoryItem>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 5
+            ),
+            pagingSourceFactory = {
+                StoryPagingSource(apiService)
+            }
+        ).liveData
+//        emit(ResultState.Loading)
+//        try {
+//            val successResponse = apiService.getStories()
+//            emit(ResultState.Success(successResponse.listStory))
+//        } catch (e: HttpException) {
+//            val errorBody = e.response()?.errorBody()?.string()
+//            val errorResponse = Gson().fromJson(errorBody, StoryResponse::class.java)
+//            emit(ResultState.Error(errorResponse.message ?: "Unknown Error"))
+//        }
     }
 
     fun getStoriesWithLocation(): LiveData<ResultState<List<ListStoryItem>>> = liveData {
@@ -47,7 +59,7 @@ class StoryRepository private constructor(
         try {
             val successResponse = apiService.getStoriesWithLocation()
             emit(ResultState.Success(successResponse.listStory))
-        }catch (e: HttpException){
+        } catch (e: HttpException) {
             val errorBody = e.response()?.errorBody()?.toString()
             val errorResponse = Gson().fromJson(errorBody, StoryResponse::class.java)
             emit(ResultState.Error(errorResponse.message ?: "Unknown Error"))
@@ -73,7 +85,7 @@ class StoryRepository private constructor(
         }
     }
 
-//    companion object {
+    //    companion object {
 //        @Volatile
 //        private var instance: StoryRepository? = null
 //        fun getInstance(
