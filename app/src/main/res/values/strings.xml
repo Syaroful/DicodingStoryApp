@@ -19,12 +19,12 @@
     <string name="welcome_to_story_app">Welcome to story app</string>
     <string name="add_new_story">Add New Story</string>
     <string name="img_desc">ini adalah contoh dari deskripsi gambar yang sangat panjang dan bisa jadi ini lebih pendek</string>
-    <string name="date">12 Apirl 2023</string>
+    <string name="date">12 April 2023</string>
     <string name="detail_story">Detail Story</string>
     <string name="note">Note</string>
     <string name="author">Author</string>
     <string name="upload">Upload</string>
-    <string name="share_your_story">Share your story...</string>
+    <string name="share_your_story">Share your story…</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="password_must_at_least_have_8_characters">Password must at least have 8 characters</string>
     <string name="type_email_format_correctly">Type email format correctly</string>
