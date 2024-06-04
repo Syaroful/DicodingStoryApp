@@ -26,4 +26,25 @@ Dicoding Story App is a project I developed as part of the requirements for the 
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/username/dicoding-story-app.git
+   https://github.com/Syaroful/DicodingStoryApp.git
+2. Open the project in Android Studio
+3. Sync the project with Gradle
+4. Run the application on an emulator or physical device
+
+## Screenshots
+<img src="path/to/screenshot1.png" alt="Login" width="150"/>
+<img src="path/to/screenshot2.png" alt="Upload Story" width="150"/>
+<img src="path/to/screenshot3.png" alt="Story List" width="150"/>
+<img src="path/to/screenshot4.png" alt="Maps" width="150"/>
+
+## Testing
+
+The application includes several unit tests and instrumentation tests to ensure the features work correctly.
+
+## Contribution
+
+If you would like to contribute to this project, please fork the repository and create a pull request with your proposed changes.
+
+## Contact
+
+If you have any questions or suggestions, feel free to contact me at creativeworks.syarofulanam@gmail.com.
