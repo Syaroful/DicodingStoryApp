@@ -4,7 +4,7 @@ Dicoding Story App is a project I developed as part of the requirements for the 
 
 ## Features
 
-- **Login**: Implemented login using an API.
+- **Login**: Implemented login and register account using an API.
 - **Upload Story**: Upload stories to the server.
 - **Display Stories**: Display all stories from other users using Paging 3.
 - **Testing**: Implemented testing for data retrieval using Paging 3.
@@ -32,10 +32,13 @@ Dicoding Story App is a project I developed as part of the requirements for the 
 4. Run the application on an emulator or physical device
 
 ## Screenshots
-<img src="path/to/screenshot1.png" alt="Login" width="150"/>
-<img src="path/to/screenshot2.png" alt="Upload Story" width="150"/>
-<img src="path/to/screenshot3.png" alt="Story List" width="150"/>
-<img src="path/to/screenshot4.png" alt="Maps" width="150"/>
+
+<img src="app/src/main/assets/screenshot_onboarding.jpg" alt="Onboarding" width="150"/>
+<img src="app/src/main/assets/screenshot_login.jpg" alt="Login" width="150"/>
+<img src="app/src/main/assets/screenshot_upload.jpg" alt="Upload Story" width="150"/>
+<img src="app/src/main/assets/screenshot_list_story.jpg" alt="Story List" width="150"/>
+<img src="app/src/main/assets/screenshot_map.jpg" alt="Maps" width="150"/>
+
 
 ## Testing
 
