@@ -33,11 +33,7 @@ Dicoding Story App is a project I developed as part of the requirements for the 
 
 ## Screenshots
 
-<img src="app/src/main/assets/screenshot_onboarding.jpg" alt="Onboarding" width="150"/>
-<img src="app/src/main/assets/screenshot_login.jpg" alt="Login" width="150"/>
-<img src="app/src/main/assets/screenshot_upload.jpg" alt="Upload Story" width="150"/>
-<img src="app/src/main/assets/screenshot_list_story.jpg" alt="Story List" width="150"/>
-<img src="app/src/main/assets/screenshot_map.jpg" alt="Maps" width="150"/>
+<img src="app/src/main/assets/screenshot_onboarding.jpg" alt="Onboarding" width="150"/> <img src="app/src/main/assets/screenshot_login.jpg" alt="Login" width="150"/> <img src="app/src/main/assets/screenshot_upload.jpg" alt="Upload Story" width="150"/> <img src="app/src/main/assets/screenshot_list_story.jpg" alt="Story List" width="150"/> <img src="app/src/main/assets/screenshot_map.jpg" alt="Maps" width="150"/>
 
 
 ## Testing
