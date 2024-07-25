@@ -1,6 +1,6 @@
-# Dicoding Story App
+# Snappy 
 
-Dicoding Story App is a project I developed as part of the requirements for the Intermediate Android Course on the Dicoding platform. This application allows users to upload a story and display stories from other users.
+Snappy story app is a project I developed as part of the requirements for the Intermediate Android Course on the Dicoding platform. This application allows users to upload a story and display stories from other users.
 
 ## Features
 
